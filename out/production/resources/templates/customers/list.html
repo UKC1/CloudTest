@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>All customers</title>
+</head>
+<body>
+<h2>회원 가입 목록 (학생 명단)</h2>
+<table>
+  <thead>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+  </tr>
+  </thead>
+  <tbody>
+  <tr th:each="customer : ${customerinfo}">
+    <td th:text="${customer.customerId}"></td>
+    <td th:text="${customer.name}"></td>
+    <td>
+      <a th:href="@{/customers/detail_list/{id}(id=${customer.customerId})}">상세 목록보기</a>
+    </td>
+  </tr>
+  </tbody>
+</table>
+<a href="/customers/create">신규 학생 추가하기</a>
+</body>
+</html>

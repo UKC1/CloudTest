@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>Update Student</title>
+</head>
+<body>
+
+<table>
+  <tr>
+    <th>ID</th>
+    <th>Name</th>
+    <th>Email</th>
+    <th>Phone Number</th>
+  </tr>
+  <tbody>
+  <tr th:each="customer : ${customerinfo}">
+    <td th:text="${customer.customerId}"></td>
+    <td th:text="${customer.name}"></td>
+    <td th:text="${customer.id}"></td>
+    <td th:text="${customer.password}"></td>
+  </tr>
+  </tbody>
+</table>
+<a href="/customers">첫화면으로 되돌아가기</a>
+
+<br><br>
+<h2>수정할 정보를 입력하세요</h2>
+<form th:action="@{/customers/update/{id}(id=${customerinfo.customerId})}" th:object="${customerinfo}" method="post">
+  Name: <input type="text" th:field="*{name}" /><br>
+  Id: <input type="text" th:field="*{id}" /><br>
+  Password: <input type="text" th:field="*{password}" /><br>
+  <button type="submit">수정하기</button>
+</form>
+
+<form th:action="@{/customers/delete/{id}(id=${customerinfo.customerId})}" method="get">
+  <button type="submit">삭제하기</button>
+</form>
+
+<form action="#" th:action="@{/customers}" th:object="${customerinfo}" method="get">
+  <!--    Name: <input type="text" th:field="*{name}" /><br>-->
+  <!--    Email: <input type="email" th:field="*{email}" /><br>-->
+  <!--    Phone Number: <input type="text" th:field="*{phoneNumber}" /><br>-->
+  <button type="submit">첫화면으로 되돌아가기</button>
+</form>
+
+
+
+</body>
+</html>

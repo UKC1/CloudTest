@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+  <title>신규 학생 추가하기</title>
+</head>
+<body>
+<h2>신규 학생 추가하기</h2>
+<form th:action="@{/customers/create}" th:object="${customerinfo}" method="post">
+  Name: <input type="text" th:field="*{name}" /><br>
+  Id: <input type="text" th:field="*{id}" /><br>
+  Password: <input type="text" th:field="*{password}" /><br>
+  <button type="submit">Submit</button>
+</form>
+</body>
+</html>
