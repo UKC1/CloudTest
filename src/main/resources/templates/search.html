@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title>물건 검색</title>
+</head>
+<body>
+<form action="/search" method="post">
+    <label for="item">물건 이름:</label>
+    <input type="text" id="item" name="item">
+    <button type="submit">검색</button>
+</form>
+
+<!-- 검색 결과 출력 -->
+<div>
+    <h2>검색 결과</h2>
+    <p>물건 이름: <span th:text="${itemName}"></span></p>
+    <p>재고: <span th:text="${itemQuantity}"></span></p>
+</div>
+</body>
+</html>
