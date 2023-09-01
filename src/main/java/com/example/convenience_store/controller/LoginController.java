@@ -27,10 +27,10 @@ public class LoginController {
         return "login";
     }
 
-    @GetMapping("/success")
-    public String successPage() {
-        return "success";
-    }
+//    @GetMapping("/success")
+//    public String successPage() {
+//        return "success";
+//    }
 
     @PostMapping("/signup")
     public String signupProcess(@RequestParam String name, @RequestParam String id, @RequestParam String password) {
@@ -50,7 +50,7 @@ public class LoginController {
         if (customer.isPresent()) {
             // 인증 성공 시
             session.setAttribute("loggedInUser", customer.get());
-            return "redirect:/success"; // 로그인 성공 시 index 페이지로 리다이렉션
+            return "redirect:/search"; // 로그인 성공 시 search로 이동
         } else {
             model.addAttribute("error", "로그인 실패!"); // 에러 메시지 전달
             return "login"; // 로그인 실패 시 다시 로그인 페이지로 이동

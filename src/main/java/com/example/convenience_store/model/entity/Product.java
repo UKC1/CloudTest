@@ -4,14 +4,13 @@ import lombok.AllArgsConstructor;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.ManyToOne;
+import javax.persistence.*;
 
 @Data
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
+@Table(name = "product")
 public class Product {
     @Id
     private Integer product_id;
@@ -20,5 +19,6 @@ public class Product {
     private int price;
 
     @ManyToOne
+    @JoinColumn(name = "store_id")
     private Store store;
 }
