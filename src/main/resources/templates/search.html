@@ -6,16 +6,35 @@
 </head>
 <body>
 <form action="/search" method="post">
-    <label for="item">물건 이름:</label>
-    <input type="text" id="item" name="item">
+    <label for="name">물건 이름:</label>
+    <input type="text" id="name" name="name">
     <button type="submit">검색</button>
 </form>
 
 <!-- 검색 결과 출력 -->
 <div>
     <h2>검색 결과</h2>
-    <p>물건 이름: <span th:text="${itemName}"></span></p>
-    <p>재고: <span th:text="${itemQuantity}"></span></p>
+    <p th:if="${message}" th:text="${message}"></p>
+    <table>
+        <thead>
+        <tr>
+            <th>가게</th>
+            <th>물건 이름</th>
+            <th>재고</th>
+            <th>가격</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${foundProducts}">
+            <td th:text="${product.store.name}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.price}"></td>
+        </tr>
+        </tbody>
+    </table>
 </div>
+
+
 </body>
 </html>

@@ -10,6 +10,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import java.util.List;
+
 @Controller
 public class ProductController {
     @Autowired
@@ -20,19 +22,17 @@ public class ProductController {
         return "search";
     }
 
-
     @PostMapping("/search")
-    public String searchItem(@RequestParam String item, Model model) {
-        Product foundProduct = productService.findProductByName(item);
+    public String searchItem(@RequestParam String name, Model model) {
+        List<Product> foundProducts = productService.findProductByName(name);
 
-        if (foundProduct != null) {
-            model.addAttribute("itemName", foundProduct.getName());
-            model.addAttribute("itemQuantity", foundProduct.getQuantity());
+        if (!foundProducts.isEmpty()) {
+            model.addAttribute("foundProducts", foundProducts);
         } else {
-            model.addAttribute("itemName", "물건을 찾을 수 없습니다.");
-            model.addAttribute("itemQuantity", "");
+            model.addAttribute("message", "물건을 찾을 수 없습니다.");
         }
 
         return "search";
     }
+
 }
