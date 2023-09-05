@@ -2,18 +2,100 @@
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
     <meta charset="UTF-8">
-    <title>물건 검색</title>
+    <title>재고 확인</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: left;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #c7a3d4;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(to bottom, #b392c5, #a07ea9);
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+        }
+
+        th {
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
 <form action="/search" method="post">
-    <label for="name">물건 이름:</label>
+    <label for="name">재고 확인:</label>
     <input type="text" id="name" name="name">
     <button type="submit">검색</button>
 </form>
 
 <!-- 검색 결과 출력 -->
 <div>
-    <h2>검색 결과</h2>
+    <h2>재고 현황</h2>
     <p th:if="${message}" th:text="${message}"></p>
     <table>
         <thead>
@@ -34,7 +116,5 @@
         </tbody>
     </table>
 </div>
-
-
 </body>
 </html>

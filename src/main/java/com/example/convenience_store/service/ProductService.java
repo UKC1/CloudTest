@@ -12,6 +12,7 @@ public class ProductService {
     @Autowired
     private ProductRepository productRepository;
     public List<Product> findProductByName(String name) {
-        return productRepository.findByName(name);
+        return productRepository.findByNameContaining(name);
     }
+
 }
