@@ -3,20 +3,84 @@
 <head>
   <meta charset="UTF-8">
   <title>회원 가입</title>
+  <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        h1 {
+            color: #c7a3d4;
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 40px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: left;
+            color: #555;
+        }
+
+        input[type="text"],
+        input[type="password"] {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #c7a3d4;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(to bottom, #b392c5, #a07ea9);
+        }
+    </style>
 </head>
 <body>
-<h1>회원 가입</h1>
 <form action="#" method="post">
+  <h1>회원 가입</h1>
+
   <label for="name">이름:</label>
-  <input type="text" id="name" name="name" required><br>
+  <input type="text" id="name" name="name" required>
 
   <label for="id">아이디:</label>
-  <input type="text" id="id" name="id" required><br>
+  <input type="text" id="id" name="id" required>
 
   <label for="password">비밀번호:</label>
-  <input type="password" id="password" name="password" required><br>
+  <input type="password" id="password" name="password" required>
 
-  <button type="submit">회원가입</button>
+  <button type="submit">회원가입</button> <!-- Updated button text -->
 </form>
 </body>
 </html>
