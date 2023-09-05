@@ -27,11 +27,6 @@ public class LoginController {
         return "login";
     }
 
-//    @GetMapping("/success")
-//    public String successPage() {
-//        return "success";
-//    }
-
     @PostMapping("/signup")
     public String signupProcess(@RequestParam String name, @RequestParam String id, @RequestParam String password) {
         Customer customer = new Customer();
