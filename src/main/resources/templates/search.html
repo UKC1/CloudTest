@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.w3.org/1999/xhtml">
+<head>
+    <meta charset="UTF-8">
+    <title>재고 확인</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        form {
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            text-align: center;
+            padding: 20px;
+            max-width: 400px;
+            width: 90%;
+        }
+
+        h2 {
+        font-size: 28px;
+        margin-top: 20px;
+        text-align: center; /* 텍스트 가운데 정렬 */
+        }
+
+        label {
+            display: block;
+            margin-bottom: 10px;
+            font-weight: bold;
+            text-align: left;
+            color: #555;
+        }
+
+        input[type="text"] {
+            width: 90%;
+            padding: 12px;
+            margin-bottom: 20px;
+            border: 2px solid #c7a3d4;
+            border-radius: 5px;
+            font-size: 18px;
+        }
+
+        button[type="submit"] {
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            color: #fff;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        button[type="submit"]:hover {
+            background: linear-gradient(to bottom, #b392c5, #a07ea9);
+        }
+
+        h2 {
+            font-size: 28px;
+            margin-top: 20px;
+        }
+
+        table {
+            width: 100%;
+            border-collapse: collapse;
+            background-color: rgba(255, 255, 255, 0.9);
+            border-radius: 8px;
+            box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
+            margin-bottom: 30px;
+        }
+
+        th, td {
+            padding: 15px;
+            text-align: left;
+            border-bottom: 1px solid #ddd;
+            color: #333;
+        }
+
+        th {
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            color: #fff;
+        }
+
+
+
+
+
+    </style>
+</head>
+<body>
+<form action="/search" method="post" style="text-align: center;">
+    <label for="name" style="display: block; text-align: center;">재고 확인</label>
+    <input type="text" id="name" name="name">
+    <button type="submit">검색</button>
+</form>
+
+<!-- 검색 결과 출력 -->
+<div>
+    <h2>재고 현황</h2>
+    <p th:if="${message}" th:text="${message}"></p>
+    <table>
+        <thead>
+        <tr>
+            <th>가게</th>
+            <th>물건 이름</th>
+            <th>재고</th>
+            <th>가격</th>
+            <th>예약</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="product : ${foundProducts}">
+            <td th:text="${product.store.name}"></td>
+            <td th:text="${product.name}"></td>
+            <td th:text="${product.quantity}"></td>
+            <td th:text="${product.price}"></td>
+            <td>
+                <form th:action="@{/reserve}" method="post" th:if="${product.quantity != 0}">
+                    <input type="hidden" name="productId" th:value="${product.product_id}" />
+                    <input type="hidden" name="productName" th:value="${product.name}" />
+                    <input type="hidden" name="productPrice" th:value="${product.price}" />
+                    <button type="submit">예약</button>
+                </form>
+                <button type="button" class="reserve-button" disabled="disabled" th:unless="${product.quantity != 0}">예약</button>
+            </td>
+        </tr>
+        </tbody>
+    </table>
+</div>
+
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+        var reserveButtons = document.querySelectorAll(".reserve-button");
+
+        reserveButtons.forEach(function (button) {
+            button.addEventListener("click", function () {
+                var row = button.closest("tr");
+                var productId = row.querySelector('input[name="productId"]').value;
+                var productName = row.querySelector('input[name="productName"]').value;
+                var productPrice = row.querySelector('input[name="productPrice"]').value;
+            });
+        });
+    });
+</script>
+
+</body>
+</html>

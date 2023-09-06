@@ -10,12 +10,15 @@ import javax.persistence.*;
 @AllArgsConstructor
 @NoArgsConstructor
 @Entity
-@Table(name = "customer")
-public class Customer {
+@Table(name = "product")
+public class Product {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer customer_id;
-    private String id;
-    private String password;
+    private Integer product_id;
     private String name;
+    private int quantity;
+    private int price;
+
+    @ManyToOne
+    @JoinColumn(name = "store_id")
+    private Store store;
 }

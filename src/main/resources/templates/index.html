@@ -1,10 +1,49 @@
 <!DOCTYPE html>
 <html>
 <head>
+    <meta charset="UTF-8">
     <title>Main Page</title>
+    <style>
+        body {
+            font-family: 'Arial', sans-serif;
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            margin: 0;
+            padding: 0;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            min-height: 100vh;
+            color: #fff;
+        }
+
+        h1 {
+            color: #fff; /* Updated text color to white */
+            font-size: 36px;
+            margin-bottom: 20px;
+        }
+
+        a {
+            background: linear-gradient(to bottom, #c7a3d4, #b392c5);
+            color: #fff;
+            border: 2px solid #fff;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            text-decoration: none;
+            margin: 10px;
+            transition: background-color 0.3s ease, color 0.3s ease;
+        }
+
+        a:hover {
+            background: linear-gradient(to bottom, #b392c5, #a07ea9);
+            color: #fff;
+        }
+    </style>
 </head>
 <body>
-<h1>Welcome to the Main Page!</h1>
+<h1>환영합니다!</h1>
 <a href="/login">로그인</a>
 <a href="/signup">회원가입</a>
 </body>
