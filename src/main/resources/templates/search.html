@@ -17,7 +17,7 @@
             color: #fff;
         }
 
-        form {
+        .form {
             background-color: rgba(255, 255, 255, 0.9);
             border-radius: 8px;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.2);
@@ -25,6 +25,7 @@
             padding: 20px;
             max-width: 400px;
             width: 90%;
+            margin-top: 30px;
         }
 
         h2 {
@@ -54,10 +55,21 @@
             background: linear-gradient(to bottom, #c7a3d4, #b392c5);
             color: #fff;
             border: none;
-            padding: 12px 20px;
+            padding: 10px 15px;
             border-radius: 5px;
             cursor: pointer;
-            font-size: 20px;
+            font-size: 12px;
+            transition: background-color 0.3s ease;
+        }
+
+        .reserve-button {
+            background: linear-gradient(to bottom, #808080, #6a6a6a); /* 회색 그라데이션 */
+            color: #fff;
+            border: none;
+            padding: 10px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 12px;
             transition: background-color 0.3s ease;
         }
 
@@ -81,7 +93,7 @@
 
         th, td {
             padding: 15px;
-            text-align: left;
+            text-align: center;
             border-bottom: 1px solid #ddd;
             color: #333;
         }
@@ -91,6 +103,25 @@
             color: #fff;
         }
 
+        .logout-button {
+            background: #fff;
+            color: #b392c5;
+            position: absolute;
+            top: 20px;
+            right: 20px;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            cursor: pointer;
+            font-size: 20px;
+            transition: background-color 0.3s ease;
+        }
+
+        .logout-button:hover {
+            background: #fff;
+            color: #b392c5;
+        }
+
 
 
 
@@ -98,7 +129,10 @@
     </style>
 </head>
 <body>
-<form action="/search" method="post" style="text-align: center;">
+<form action="/logout" method="get">
+    <button class="logout-button" type="submit">로그아웃</button>
+</form>
+<form class="form" action="/search" method="post" style="text-align: center;">
     <label for="name" style="display: block; text-align: center;">재고 확인</label>
     <input type="text" id="name" name="name">
     <button type="submit">검색</button>
@@ -124,34 +158,20 @@
             <td th:text="${product.name}"></td>
             <td th:text="${product.quantity}"></td>
             <td th:text="${product.price}"></td>
+            <!--            <td><a th:href="@{/reserve/{id}(id=${product.productId})}" th:if="${product.quantity > 0}">주문</a></td>-->
+            <!--            <td><button type="button" class="reserve-button" th:unless="${product.quantity > 0}" disabled>매진</button></td>-->
             <td>
-                <form th:action="@{/reserve}" method="post" th:if="${product.quantity != 0}">
-                    <input type="hidden" name="productId" th:value="${product.product_id}" />
+                <form th:action="@{/reserve/{id}(id=${product.productId})}" method="get" th:if="${product.quantity > 0}">
+                    <input type="hidden" name="storeName" th:value="${product.store.name}" />
                     <input type="hidden" name="productName" th:value="${product.name}" />
                     <input type="hidden" name="productPrice" th:value="${product.price}" />
-                    <button type="submit">예약</button>
+                    <button type="submit">주문</button>
                 </form>
-                <button type="button" class="reserve-button" disabled="disabled" th:unless="${product.quantity != 0}">예약</button>
+                <button type="button" class="reserve-button" th:unless="${product.quantity > 0}" disabled>매진</button>
             </td>
         </tr>
         </tbody>
     </table>
 </div>
-
-<script>
-    document.addEventListener("DOMContentLoaded", function () {
-        var reserveButtons = document.querySelectorAll(".reserve-button");
-
-        reserveButtons.forEach(function (button) {
-            button.addEventListener("click", function () {
-                var row = button.closest("tr");
-                var productId = row.querySelector('input[name="productId"]').value;
-                var productName = row.querySelector('input[name="productName"]').value;
-                var productPrice = row.querySelector('input[name="productPrice"]').value;
-            });
-        });
-    });
-</script>
-
 </body>
 </html>
