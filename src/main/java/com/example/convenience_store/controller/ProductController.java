@@ -21,6 +21,7 @@ public class ProductController {
     @Autowired
     private ProductService productService;
 
+
     @GetMapping("/search")
     public String showSearchPage(HttpSession session, Model model0) {
         Customer customer = (Customer) session.getAttribute("customer");
