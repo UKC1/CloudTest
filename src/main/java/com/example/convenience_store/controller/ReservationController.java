@@ -9,12 +9,12 @@ import com.example.convenience_store.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.*;
+import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import javax.servlet.http.HttpSession;
 
 @Controller
-@RequestMapping("/reserve") // 이 컨트롤러의 URL 경로를 /reservation으로 설정
 public class ReservationController {
     @Autowired
     private ProductService productService;
@@ -25,8 +25,10 @@ public class ReservationController {
     @Autowired
     private ReservationService reservationService;
 
-    @GetMapping("/confirm")
-    public String confirmReservation(@RequestParam Integer productId, @RequestParam Integer quantity, HttpSession session, Model model) {
+    @GetMapping("/confirm") // /confirm 경로로 변경
+    public String confirmReservation(@RequestParam(name = "productId") Integer productId, // 파라미터 이름 추가
+                                     @RequestParam(name = "quantity") Integer quantity, // 파라미터 이름 추가
+                                     HttpSession session, Model model) {
         Customer customer = (Customer) session.getAttribute("customer");
 
         if (customer == null) {
@@ -44,10 +46,13 @@ public class ReservationController {
         reservation.setQuantity(quantity);
         reservation.setPrice(product.getPrice() * quantity); // 가격 계산
 
+
         // DB에 예약 정보 추가
         reservationService.create(reservation);
 
         model.addAttribute("reservation", reservation);
-        return "reservation/confirm";
+        model.addAttribute("productinfo", productService.getAllProducts()); // productinfo를 가져와서 전달
+
+        return "confirm"; // 예약 확인 페이지로 이동
     }
 }

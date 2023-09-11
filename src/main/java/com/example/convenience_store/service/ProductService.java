@@ -22,6 +22,20 @@ public class ProductService {
         return null;
     }
 
+    public Product update(Product updatedProduct) {
+        Product existingProduct = productRepository.findById(updatedProduct.getProductId()).orElse(null);
+        if (existingProduct != null) {
+            if (existingProduct.getQuantity() - updatedProduct.getQuantity() < 0) {
+                System.out.println("수량이 없습니다");
+            } else {
+                existingProduct.setQuantity(existingProduct.getQuantity() - updatedProduct.getQuantity());
+            }
+            Product updated = productRepository.save(existingProduct);
+            return toProductResponse(updated);
+        }
+        return null;
+    }
+
     private Product toProductResponse(Product product) {
         return Product.builder()
                 .store(product.getStore())
@@ -31,4 +45,9 @@ public class ProductService {
                 .build();
     }
 
+
+    // 모든 상품 정보를 가져오는 메서드
+    public List<Product> getAllProducts() {
+        return productRepository.findAll();
+    }
 }
