@@ -7,15 +7,12 @@ import org.springframework.stereotype.Service;
 
 @Service
 public class ReservationService {
-    private final ReservationRepository reservationRepository;
-
     @Autowired
-    public ReservationService(ReservationRepository reservationRepository) {
-        this.reservationRepository = reservationRepository;
-    }
+    private ReservationRepository reservationRepository;
 
-
-    public Reservation create(Reservation reservation) {
+    public Reservation save(Reservation reservation) {
+        int totalPrice = reservation.getProduct().getPrice() * reservation.getQuantity();
+        reservation.setPrice(totalPrice);
         return reservationRepository.save(reservation);
     }
 }

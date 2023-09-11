@@ -2,21 +2,30 @@ package com.example.convenience_store.controller;
 
 import com.example.convenience_store.model.entity.Customer;
 import com.example.convenience_store.model.entity.Product;
+import com.example.convenience_store.model.entity.Reservation;
 import com.example.convenience_store.repository.ProductRepository;
+import com.example.convenience_store.repository.ReservationRepository;
 import com.example.convenience_store.service.CustomerService;
 import com.example.convenience_store.service.ProductService;
+import com.example.convenience_store.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
+import java.sql.Timestamp;
+import java.time.Instant;
 import java.util.List;
 
 @Controller
 public class ProductController {
     @Autowired
     private ProductService productService;
+    @Autowired
+    private ReservationService reservationService;
+    @Autowired
+    private ReservationRepository reservationRepository;
 
 
     @GetMapping("/search")
@@ -49,29 +58,36 @@ public class ProductController {
     @GetMapping("/reserve/{id}")
     public String reserveForm(@PathVariable Integer id, Model model, HttpSession session) {
         Product productResponse = productService.read(id);
-        session.setAttribute("productId", id);
+        session.setAttribute("product", productResponse);
 
-        Product productRequest = Product.builder()
-                .store(productResponse.getStore())
-                .name(productResponse.getName())
-                .quantity(productResponse.getQuantity())
-                .price(productResponse.getPrice())
-                .build();
-
-
-        model.addAttribute("productinfo", productRequest);
+        model.addAttribute("productinfo", productResponse);
         return "reserve";
     }
 
     @PostMapping("/update")
     public String ProductUpdateForm(@ModelAttribute Product productRequest, HttpSession session) {
-        Integer id = (Integer) session.getAttribute("productId");
-        productRequest.setProductId(id);
-        Product product = productService.update(productRequest);
+        Product sessionProduct = (Product) session.getAttribute("product");
+        Customer sessionCustomer = (Customer) session.getAttribute("customer");
 
-        if(product == null){
+        sessionProduct.setQuantity(productRequest.getQuantity());
+        Product updatedProduct = productService.update(sessionProduct);
+
+        if(updatedProduct == null){
             return "fail";
         }
+
+        // ReservationService에서 만들 코드
+        Reservation newReservation = new Reservation();
+        newReservation.setQuantity(productRequest.getQuantity());
+        newReservation.setPrice(sessionProduct.getPrice());
+        newReservation.setTime(Timestamp.from(Instant.now()));
+        newReservation.setCustomer(sessionCustomer);
+        newReservation.setProduct(updatedProduct);
+        newReservation.setStore(sessionProduct.getStore());
+
+        reservationService.save(newReservation);
+
         return "confirm";
     }
+
 }

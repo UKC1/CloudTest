@@ -38,6 +38,7 @@ public class ProductService {
 
     private Product toProductResponse(Product product) {
         return Product.builder()
+                .productId(product.getProductId())  //product_id 추가
                 .store(product.getStore())
                 .name(product.getName())
                 .quantity(product.getQuantity())
@@ -45,9 +46,4 @@ public class ProductService {
                 .build();
     }
 
-
-    // 모든 상품 정보를 가져오는 메서드
-    public List<Product> getAllProducts() {
-        return productRepository.findAll();
-    }
 }
