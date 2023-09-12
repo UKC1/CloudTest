@@ -24,9 +24,6 @@ public class ProductController {
     private ProductService productService;
     @Autowired
     private ReservationService reservationService;
-    @Autowired
-    private ReservationRepository reservationRepository;
-
 
     @GetMapping("/search")
     public String showSearchPage(HttpSession session, Model model0) {
@@ -35,11 +32,6 @@ public class ProductController {
             return "redirect:/login";
         }
         return "search";
-    }
-
-    @GetMapping("/reserve")
-    public String reservationPage() {
-        return "reserve";
     }
 
     @PostMapping("/search")
@@ -53,15 +45,6 @@ public class ProductController {
         }
 
         return "search";
-    }
-
-    @GetMapping("/reserve/{id}")
-    public String reserveForm(@PathVariable Integer id, Model model, HttpSession session) {
-        Product productResponse = productService.read(id);
-        session.setAttribute("product", productResponse);
-
-        model.addAttribute("productinfo", productResponse);
-        return "reserve";
     }
 
     @PostMapping("/update")
