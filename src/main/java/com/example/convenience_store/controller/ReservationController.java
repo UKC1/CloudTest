@@ -8,13 +8,11 @@ import com.example.convenience_store.service.ReservationService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.DeleteMapping;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 
 import javax.servlet.http.HttpSession;
 import java.util.List;
+import java.util.Optional;
 
 @Controller
 public class ReservationController {
@@ -56,11 +54,26 @@ public class ReservationController {
         return "mypage";
     }
 
-    @GetMapping ("/delete/{id}")
-    public String deleteStudent(@PathVariable Integer id) {
-        reservationService.delete(id);
-        System.out.println("삭제완료");
+
+    @PostMapping("/delete/{id}")
+    public String RollbackReservation(@PathVariable Integer id, HttpSession session) {
+        Optional<Reservation> reservationOptional = reservationService.getReservationWithProduct(id);
+
+        if (reservationOptional.isPresent()) {
+            Reservation reservation = reservationOptional.get();
+            Product product = reservation.getProduct();
+
+            // 이제 예약 정보와 상품 정보를 사용할 수 있습니다.
+//            System.out.println("Reservation ID: " + reservation.getNum());
+//            System.out.println("Reservation Quantity: " + reservation.getQuantity());
+//            System.out.println("Product ID: " + product.getProductId());
+//            System.out.println("Product Name: " + product.getName());
+
+            // 여기서 추가 작업 수행 가능
+            productService.rollBack(product, reservation.getQuantity());
+            // 예약 삭제
+            reservationService.delete(id);
+        }
         return "redirect:/mypage";
     }
-
 }

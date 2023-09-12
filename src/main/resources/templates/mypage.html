@@ -169,7 +169,7 @@
       <td th:text="${reservation.quantity}"></td>
       <td th:text="${reservation.price}"></td>
       <td>
-        <form th:action="@{/delete/{id}(id=${reservation.num})}" method="get">
+        <form th:action="@{/delete/{id}(id=${reservation.num})}" method="post">
           <button class="button" type="submit">취소</button>
         </form>
       </td>

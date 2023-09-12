@@ -29,7 +29,7 @@ public class ReservationService {
         return reservationRepository.findByCustomer(sessionCustomer);
     }
 
-    public Optional<Reservation> getReservationById(Integer id) {
+    public Optional<Reservation> getReservationWithProduct(Integer id) {
         return reservationRepository.findById(id);
     }
 

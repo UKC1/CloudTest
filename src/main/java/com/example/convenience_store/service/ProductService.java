@@ -36,6 +36,16 @@ public class ProductService {
         return null;
     }
 
+    public Product rollBack(Product backProduct, Integer backCount) {
+        Product existingProduct = productRepository.findById(backProduct.getProductId()).orElse(null);
+        if (existingProduct != null) {
+            existingProduct.setQuantity(existingProduct.getQuantity() + backCount);
+            Product rollBack = productRepository.save(existingProduct);
+            return toProductResponse(rollBack);
+        }
+        return null;
+    }
+
     private Product toProductResponse(Product product) {
         return Product.builder()
                 .productId(product.getProductId())  //product_id 추가
