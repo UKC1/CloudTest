@@ -6,6 +6,7 @@ import com.example.convenience_store.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.servlet.http.HttpSession;
 import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
@@ -23,12 +24,20 @@ public class ReservationService {
         return reservationRepository.save(reservation);
     }
 
-    public List<Reservation> getAllReservations() {
-        return reservationRepository.findAll();
+    public List<Reservation> getAllReservations(HttpSession session) {
+        Customer sessionCustomer = (Customer) session.getAttribute("customer");
+        return reservationRepository.findByCustomer(sessionCustomer);
     }
 
     public Optional<Reservation> getReservationById(Integer id) {
         return reservationRepository.findById(id);
+    }
+
+    public void delete(Integer id) {
+        Reservation existingReservation = reservationRepository.findById(id).orElse(null);
+        if (existingReservation != null) {
+            reservationRepository.delete(existingReservation);
+        }
     }
 
 }
