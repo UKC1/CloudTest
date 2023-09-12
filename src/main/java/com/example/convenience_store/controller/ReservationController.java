@@ -62,4 +62,5 @@ public class ReservationController {
         System.out.println("삭제완료");
         return "redirect:/mypage";
     }
+
 }
