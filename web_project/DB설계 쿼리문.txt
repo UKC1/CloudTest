@@ -1,0 +1,40 @@
+CREATE DATABASE ConvenienceStore;
+USE ConvenienceStore;
+
+-- Customer 테이블
+CREATE TABLE Customer (
+    customer_id INT PRIMARY KEY AUTO_INCREMENT,
+    id VARCHAR(50) NOT NULL,
+    password VARCHAR(50) NOT NULL,
+    name VARCHAR(50)
+);
+
+-- Store 테이블
+CREATE TABLE Store (
+    store_id INT PRIMARY KEY,
+    name VARCHAR(50) NOT NULL
+);
+
+-- Product 테이블 (Store와의 Foreign Key 추가)
+CREATE TABLE Product (
+    product_id INT PRIMARY KEY,
+    store_id INT,
+    name VARCHAR(50) NOT NULL,
+    quantity INT NOT NULL,
+    price INT NOT NULL,
+    FOREIGN KEY (store_id) REFERENCES Store(store_id)
+);
+
+-- Reservation 테이블 (Customer, Product, Store와의 Foreign Key 추가)
+CREATE TABLE Reservation (
+    num INT PRIMARY KEY,
+    customer_id INT,
+    product_id INT,
+    store_id INT, 
+    quantity INT NOT NULL,
+    price INT NOT NULL,
+    time TIMESTAMP,
+    FOREIGN KEY (customer_id) REFERENCES Customer(customer_id),
+    FOREIGN KEY (product_id) REFERENCES Product(product_id),
+    FOREIGN KEY (store_id) REFERENCES Store(store_id)
+);

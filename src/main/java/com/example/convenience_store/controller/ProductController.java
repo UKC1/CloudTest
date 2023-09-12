@@ -87,7 +87,7 @@ public class ProductController {
 
         reservationService.save(newReservation);
 
-        return "confirm";
+        return "redirect:/mypage";
     }
 
 }

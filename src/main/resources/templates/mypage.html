@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-    <meta charset="UTF-8">
-    <title>재고 확인</title>
-    <style>
+  <meta charset="UTF-8">
+  <title>예약 확인</title>
+  <style>
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #96B3E8, #66a3d4);
@@ -121,7 +121,7 @@
             color: #b392c5;
         }
 
-        .mypage-button {
+        .order-button {
             background: linear-gradient(to bottom, #96B3E8, #66a3d4);
             color: #fff;
             position: absolute;
@@ -135,63 +135,47 @@
             transition: background-color 0.3s ease;
         }
 
-        .mypage-button:hover {
+        .order-button:hover {
             background: #fff;
             color: #b392c5;
         }
-
-
-
-
-
     </style>
 </head>
 <body>
 <form action="/logout" method="get">
-    <button class="logout-button" type="submit">로그아웃</button>
+  <button class="logout-button" type="submit">로그아웃</button>
 </form>
-<form action="/mypage" method="get">
-    <button class="mypage-button" type="submit">마이페이지</button>
-</form>
-<form class="form" action="/search" method="post" style="text-align: center;">
-    <label for="name" style="display: block; text-align: center;">재고 확인</label>
-    <input type="text" id="name" name="name">
-    <button class="button" type="submit">검색</button>
+<form action="/search" method="get">
+  <button class="order-button" type="submit">추가주문</button>
 </form>
 
-<!-- 검색 결과 출력 -->
 <div>
-    <h2>재고 현황</h2>
-    <p th:if="${message}" th:text="${message}"></p>
-    <table>
-        <thead>
-        <tr>
-            <th>편의점</th>
-            <th>물품</th>
-            <th>재고</th>
-            <th>가격</th>
-            <th>예약</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr th:each="product : ${foundProducts}">
-            <td th:text="${product.store.name}"></td>
-            <td th:text="${product.name}"></td>
-            <td th:text="${product.quantity}"></td>
-            <td th:text="${product.price}"></td>
-            <!--            <td><a th:href="@{/reserve/{id}(id=${product.productId})}" th:if="${product.quantity > 0}">주문</a></td>-->
-            <!--            <td><button type="button" class="reserve-button" th:unless="${product.quantity > 0}" disabled>매진</button></td>-->
-            <td>
-                <form th:action="@{/reserve/{id}(id=${product.productId})}" method="get" th:if="${product.quantity > 0}">
-                    <input type="hidden" name="productName" th:value="${product.name}" />
-                    <input type="hidden" name="productPrice" th:value="${product.price}" />
-                    <button class="button" type="submit">주문</button>
-                </form>
-                <button type="button" class="reserve-button" th:unless="${product.quantity > 0}" disabled>매진</button>
-            </td>
-        </tr>
-        </tbody>
-    </table>
+  <h2>예약 현황</h2>
+  <p th:if="${message}" th:text="${message}"></p>
+  <table>
+    <thead>
+    <tr>
+      <th>가게</th>
+      <th>물품</th>
+      <th>수량</th>
+      <th>가격</th>
+      <th>예약</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="reservation : ${reservations}">
+      <td th:text="${reservation.store.name}"></td>
+      <td th:text="${reservation.product.name}"></td>
+      <td th:text="${reservation.quantity}"></td>
+      <td th:text="${reservation.price}"></td>
+      <td>
+        <form>
+          <button class="button" type="submit">취소</button>
+        </form>
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>
 </body>
 </html>
