@@ -26,6 +26,13 @@ public class ReservationController {
         return "mypage";
     }
 
+    @GetMapping ("/delete/{id}")
+    public String deleteStudent(@PathVariable Integer id) {
+        reservationService.delete(id);
+        System.out.println("삭제완료");
+        return "redirect:/mypage";
+    }
+
 
 
 }

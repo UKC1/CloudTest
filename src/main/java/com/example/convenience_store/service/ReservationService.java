@@ -30,5 +30,11 @@ public class ReservationService {
     public Optional<Reservation> getReservationById(Integer id) {
         return reservationRepository.findById(id);
     }
+    public void delete(Integer id) {
+        Reservation existingReservation = reservationRepository.findById(id).orElse(null);
+        if (existingReservation != null) {
+            reservationRepository.delete(existingReservation);
+        }
+    }
 
 }
