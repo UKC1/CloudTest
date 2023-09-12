@@ -14,5 +14,36 @@ public class ProductService {
     public List<Product> findProductByName(String name) {
         return productRepository.findByNameContaining(name);
     }
+    public Product read(Integer id) {
+        Product product = productRepository.findById(id).orElse(null);
+        if (product != null) {
+            return toProductResponse(product);
+        }
+        return null;
+    }
+
+    public Product update(Product updatedProduct) {
+        Product existingProduct = productRepository.findById(updatedProduct.getProductId()).orElse(null);
+        if (existingProduct != null) {
+            if (existingProduct.getQuantity() - updatedProduct.getQuantity() < 0) {
+                System.out.println("수량이 없습니다");
+            } else {
+                existingProduct.setQuantity(existingProduct.getQuantity() - updatedProduct.getQuantity());
+            }
+            Product updated = productRepository.save(existingProduct);
+            return toProductResponse(updated);
+        }
+        return null;
+    }
+
+    private Product toProductResponse(Product product) {
+        return Product.builder()
+                .productId(product.getProductId())  //product_id 추가
+                .store(product.getStore())
+                .name(product.getName())
+                .quantity(product.getQuantity())
+                .price(product.getPrice())
+                .build();
+    }
 
 }

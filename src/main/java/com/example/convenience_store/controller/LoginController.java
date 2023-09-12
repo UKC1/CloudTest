@@ -2,6 +2,7 @@ package com.example.convenience_store.controller;
 
 import com.example.convenience_store.model.entity.Customer;
 import com.example.convenience_store.repository.CustomerRepository;
+import com.example.convenience_store.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -16,6 +17,8 @@ import java.util.Optional;
 public class LoginController {
     @Autowired
     private CustomerRepository customerRepository;
+    @Autowired
+    private CustomerService customerService;
 
     @GetMapping("/signup")
     public String signupPage() {
@@ -26,6 +29,13 @@ public class LoginController {
     public String loginPage() {
         return "login";
     }
+
+    @GetMapping("/logout")
+    public String logout(HttpSession session) {
+        customerService.logout(session);
+        return "redirect:/login";
+    }
+
 
     @PostMapping("/signup")
     public String signupProcess(@RequestParam String name, @RequestParam String id, @RequestParam String password) {
