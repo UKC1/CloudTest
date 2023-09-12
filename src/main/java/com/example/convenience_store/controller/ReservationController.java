@@ -25,7 +25,12 @@ public class ReservationController {
     private ProductService productService;
 
     @GetMapping("/reserve")
-    public String reservationPage() {
+    public String reservationPage(HttpSession session) {
+        Customer customer = (Customer) session.getAttribute("customer");
+        if(customer == null){
+            return "redirect:/login";
+        }
+
         return "reserve";
     }
 
@@ -40,6 +45,11 @@ public class ReservationController {
 
     @GetMapping("/mypage")
     public String showReservations(Model model, HttpSession session) {
+        Customer customer = (Customer) session.getAttribute("customer");
+        if(customer == null){
+            return "redirect:/login";
+        }
+
         List<Reservation> reservations = reservationService.getAllReservations(session);
         model.addAttribute("reservations", reservations);
 
