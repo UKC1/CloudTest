@@ -16,6 +16,10 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
 
     public Reservation save(Reservation reservation) {
+        // 가격을 계산하여 설정
+        int totalPrice = reservation.getProduct().getPrice() * reservation.getQuantity();
+        reservation.setPrice(totalPrice);
+
         return reservationRepository.save(reservation);
     }
 

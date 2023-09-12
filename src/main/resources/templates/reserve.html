@@ -102,8 +102,8 @@
 <table>
     <tbody>
     <tr th:each="product : ${productinfo}">
-        <td>편의점명: <span th:text="${product.store.name}"></span></td>
-        <td>상품명: <span th:text="${product.name}"></span></td>
+        <td>편의점: <span th:text="${product.store.name}"></span></td>
+        <td>상품: <span th:text="${product.name}"></span></td>
         <td>수량: <span th:text="${product.quantity}"></span></td>
         <td>가격: <span th:text="${product.price}"></span></td>
 
