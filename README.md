@@ -39,7 +39,7 @@
 - 기능별 테스트 및 수정
 - 사용자 피드백을 바탕으로 한 최종 검토
 
-  ### 정민석 - `CustomerService`
+### 정민석 - `CustomerService`
 
 ### 도메인 모델: `Customer`
 
