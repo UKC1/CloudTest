@@ -38,3 +38,58 @@
 ### 4. 기능 검토 및 수정
 - 기능별 테스트 및 수정
 - 사용자 피드백을 바탕으로 한 최종 검토
+
+  ### 정민석 - `CustomerService`
+
+### 도메인 모델: `Customer`
+
+- **속성**:
+    - `customer_id` (Integer): 고객의 고유 식별자.
+    - `id` (String): 고객의 로그인 ID.
+    - `password` (String): 고객의 비밀번호.
+    - `name` (String): 고객의 이름.
+
+### 서비스 레이어: `CustomerService`
+
+- **login**: 고객이 시스템에 로그인할 때 사용됩니다. ID와 비밀번호가 일치하는 고객 정보를 데이터베이스에서 조회하고, 해당 정보를 세션에 저장합니다. 로그인 성공 시 true를 반환합니다.
+- **logout**: 고객이 시스템에서 로그아웃할 때 사용됩니다. 현재 세션을 무효화합니다.
+- **getUserById**: 고객의 ID로 고객 정보를 조회합니다. 캐시를 활용하여 성능을 개선하고 있으며, 찾은 고객 정보를 반환합니다.
+
+### 최원일 - `ProductService`
+
+### 도메인 모델: `Product`
+
+- **속성**:
+    - `productId` (Integer): 제품의 고유 식별자.
+    - `name` (String): 제품의 이름.
+    - `quantity` (int): 제품의 수량.
+    - `price` (int): 제품의 가격.
+    - `store` (Store): 제품이 속한 매장.
+
+### 서비스 레이어: `ProductService`
+
+- **findProductByName**: 제품의 이름을 포함하는 문자열을 받아, 해당 문자열을 포함하는 모든 제품을 조회합니다.
+- **read**: 제품 ID를 받아 해당 제품의 정보를 조회합니다. 제품 정보가 있을 경우 그 정보를 반환합니다.
+- **update**: 제공된 제품 정보로 기존의 제품 정보를 업데이트합니다. 특히, 제품의 수량을 감소시키는 로직을 포함하고 있으며, 업데이트 후의 제품 정보를 반환합니다.
+- **rollBack**: 이 메소드는 트랜잭션을 롤백하는 데 사용됩니다. 제품의 수량을 증가시키고 업데이트된 정보를 반환합니다.
+
+### 김강민 - `ReservationService` + RollBack
+
+### 도메인 모델: `Reservation`
+
+- **속성**:
+    - `num` (Integer): 예약의 고유 식별자.
+    - `quantity` (int): 예약된 제품의 수량.
+    - `price` (int): 예약의 총 가격.
+    - `time` (Timestamp): 예약 시간.
+    - `customer` (Customer): 예약한 고객.
+    - `product` (Product): 예약된 제품.
+    - `store` (Store): 예약이 이루어진 매장.
+
+### 서비스 레이어: `ReservationService`
+
+- **save**: 새로운 예약 정보를 저장합니다. 예약 시 제품의 가격과 수량을 곱하여 총 가격을 계산하고, 이 정보를 저장합니다.
+- **getAllReservations**: 현재 로그인한 고객의 모든 예약 정보를 조회합니다.
+- **getReservationWithProduct**: 특정 예약 ID로 예약 정보를 조회합니다.
+- **delete**: 특정 예약 ID로 예약 정보를 삭제합니다.
+- **rollBack**: `ProductService`의 `rollBack` 메소드
