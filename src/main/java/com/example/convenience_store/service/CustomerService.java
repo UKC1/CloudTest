@@ -15,7 +15,7 @@ public class CustomerService {
     private CustomerRepository customerRepository;
 
     public boolean login(String id, String password, HttpSession session) {
-        Optional<Customer> customer = customerRepository.findByIdAndPassword(id, password);
+        Optional<Customer> customer = customerRepository.findByLoginIdAndPasswordHash(id, password);
 
         if(customer.isPresent()) {
             session.setAttribute("customer", customer.get());
@@ -29,6 +29,6 @@ public class CustomerService {
 
     @Cacheable(value = "customer", key = "#id")
     public Customer getUserById(String id){
-        return customerRepository.findById(id).orElse(null);
+        return customerRepository.findByLoginId(id).orElse(null);
     }
 }

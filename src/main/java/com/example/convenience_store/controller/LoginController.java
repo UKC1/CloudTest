@@ -40,8 +40,8 @@ public class LoginController {
     public String signupProcess(@RequestParam String name, @RequestParam String id, @RequestParam String password) {
         Customer customer = new Customer();
         customer.setName(name);
-        customer.setId(id);
-        customer.setPassword(password);
+        customer.setLoginId(id);
+        customer.setPasswordHash(password);
 
         customerRepository.save(customer);
         return "index"; // 회원가입 후 index 페이지로 리다이렉션
@@ -49,7 +49,7 @@ public class LoginController {
 
     @PostMapping("/login")
     public String loginProcess(@RequestParam String id, @RequestParam String password, HttpSession session, Model model) {
-        Optional<Customer> customer = customerRepository.findByIdAndPassword(id, password);
+        Optional<Customer> customer = customerRepository.findByLoginIdAndPasswordHash(id, password);
 
         if (customer.isPresent()) {
             // 인증 성공 시

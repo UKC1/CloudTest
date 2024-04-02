@@ -14,8 +14,8 @@ import javax.persistence.*;
 public class Customer {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer customer_id;
-    private String id;
-    private String password;
+    private Integer customerId;
+    private String loginId;
+    private String passwordHash;
     private String name;
 }

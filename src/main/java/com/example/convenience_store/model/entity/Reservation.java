@@ -15,7 +15,7 @@ import java.sql.Timestamp;
 public class Reservation {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Integer num;
+    private Integer reservationId;
     private int quantity;
     private int price;
     private Timestamp time;
