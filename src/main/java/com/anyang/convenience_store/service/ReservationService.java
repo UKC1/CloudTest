@@ -1,13 +1,12 @@
-package com.example.convenience_store.service;
+package com.anyang.convenience_store.service;
 
-import com.example.convenience_store.model.entity.Customer;
-import com.example.convenience_store.model.entity.Reservation;
-import com.example.convenience_store.repository.ReservationRepository;
+import com.anyang.convenience_store.model.entity.Customer;
+import com.anyang.convenience_store.model.entity.Reservation;
+import com.anyang.convenience_store.repository.ReservationRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
-import javax.transaction.Transactional;
 import java.util.List;
 import java.util.Optional;
 
@@ -17,7 +16,6 @@ public class ReservationService {
     private ReservationRepository reservationRepository;
 
     public Reservation save(Reservation reservation) {
-        // 가격을 계산하여 설정
         int totalPrice = reservation.getProduct().getPrice() * reservation.getQuantity();
         reservation.setPrice(totalPrice);
 

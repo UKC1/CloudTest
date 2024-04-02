@@ -1,8 +1,8 @@
-package com.example.convenience_store.controller;
+package com.anyang.convenience_store.controller;
 
-import com.example.convenience_store.model.entity.Customer;
-import com.example.convenience_store.repository.CustomerRepository;
-import com.example.convenience_store.service.CustomerService;
+import com.anyang.convenience_store.model.entity.Customer;
+import com.anyang.convenience_store.repository.CustomerRepository;
+import com.anyang.convenience_store.service.CustomerService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;

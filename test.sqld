@@ -1,0 +1,19 @@
+TEST CASE
+
+-- Store 테이블에 데이터 추가
+INSERT INTO `store` (`name`) VALUES ('CU');
+INSERT INTO `store` (`name`) VALUES ('GS25');
+INSERT INTO `store` (`name`) VALUES ('emart24');
+INSERT INTO `store` (`name`) VALUES ('7-ELEVEN');
+INSERT INTO `store` (`name`) VALUES ('MINISTOP');
+
+-- Product 테이블에 데이터 추가
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('빵', 1000, 50, 1);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('라면', 800, 100, 2);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('음료', 1500, 70, 3);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('과자', 1200, 80, 4);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('포켓몬빵', 1900, 50, 4);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('허니버터칩', 1600, 55, 5);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('연세우유빵', 2800, 40, 3);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('샌드위치', 2600, 45, 4);
+INSERT INTO `product` (`name`, `price`, `quantity`, `store_id`) VALUES ('스누피커피우유', 1700, 80, 5);

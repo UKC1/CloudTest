@@ -1,7 +1,7 @@
-package com.example.convenience_store.service;
+package com.anyang.convenience_store.service;
 
-import com.example.convenience_store.model.entity.Product;
-import com.example.convenience_store.repository.ProductRepository;
+import com.anyang.convenience_store.model.entity.Product;
+import com.anyang.convenience_store.repository.ProductRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -26,7 +26,6 @@ public class ProductService {
         Product existingProduct = productRepository.findById(updatedProduct.getProductId()).orElse(null);
         if (existingProduct != null) {
             if (existingProduct.getQuantity() - updatedProduct.getQuantity() < 0) {
-                System.out.println("수량이 없습니다");
             } else {
                 existingProduct.setQuantity(existingProduct.getQuantity() - updatedProduct.getQuantity());
             }

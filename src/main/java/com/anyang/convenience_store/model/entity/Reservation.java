@@ -1,4 +1,4 @@
-package com.example.convenience_store.model.entity;
+package com.anyang.convenience_store.model.entity;
 
 import lombok.AllArgsConstructor;
 import lombok.Data;

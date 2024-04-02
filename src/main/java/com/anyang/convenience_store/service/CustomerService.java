@@ -1,9 +1,8 @@
-package com.example.convenience_store.service;
+package com.anyang.convenience_store.service;
 
-import com.example.convenience_store.model.entity.Customer;
-import com.example.convenience_store.repository.CustomerRepository;
+import com.anyang.convenience_store.model.entity.Customer;
+import com.anyang.convenience_store.repository.CustomerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.cache.annotation.Cacheable;
 import org.springframework.stereotype.Service;
 
 import javax.servlet.http.HttpSession;
@@ -25,10 +24,7 @@ public class CustomerService {
         return false;
     }
 
-    public void logout(HttpSession session) { session.invalidate();}
-
-    @Cacheable(value = "customer", key = "#id")
-    public Customer getUserById(String id){
-        return customerRepository.findByLoginId(id).orElse(null);
+    public void logout(HttpSession session) {
+        session.invalidate();
     }
 }
