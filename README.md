@@ -1,95 +1,81 @@
-# 편의점 예약 시스템 구축
+# 편의점 예약 시스템
 
-## 프로젝트 개요
-- **프로젝트명**: 편의점 예약 시스템
-- **팀명**: 편의점 재고털이 조직
-- **팀장**: 김강민
-- **팀원**: 최원일, 정민석
-- **기간**: 2023.08.24 - 2023.09.08
-- **최종 정리기간**: 개인 문서 정리 (2023.09.09 - 2023.09.10), 전체 문서 정리 (2023.09.11 - 2023.09.13)
-- **협업툴**: Git (Organization, Branch)
-- **문서 정리 도구**: Google Docs, Google Sheets (간트차트)
-- **벤치마킹**: 포켓CU 어플 ([포켓CU 웹사이트](https://www.pocketcu.co.kr/))
-- **통합개발환경(IDE)**: IntelliJ IDEA
-- **데이터베이스 관리 시스템**: MySQL 8.0
-- **사용 언어**: JAVA 8
-- **프레임워크**: Spring Boot 2.7.16
 
-### 프로젝트 설명
-이 프로젝트는 편의점의 인기 상품 재고를 검색하고 예약할 수 있는 시스템을 구축하는 것입니다. 포켓CU 어플을 사용하며 얻은 영감으로, 유사한 기능을 직접 구현하고자 시작하게 되었습니다.
+## Description
+편의점 예약 시스템은 편의점의 인기 상품 재고를 검색하고 예약할 수 있는 웹 기반 시스템을 구축하는 프로젝트입니다. 
+<br>사용자는 온라인으로 상품을 검색하고 예약함으로써 매장 방문 전에 필요한 상품을 확보할 수 있습니다.
 
-## 주요 작업 내용
+<hr/>
 
-### 1. 데이터베이스 설계
-- 고객 정보 테이블
-- A, B, C 편의점 재고 테이블
-- 예약 주문 정보 테이블
+## Features
 
-### 2. 화면 설계
-- 로그인 및 회원가입 창
-- 상품 검색 및 예약목록 확인 창
-- 재고현황 및 주문현황 확인 창
+- **사용자 인증 및 관리**: 로그인, 회원가입 기능 및 사용자 인증을 제공합니다.
+- **상품 검색 및 예약**: 편의점 상품에 대한 검색 기능과 예약 기능을 제공합니다.
+- **마이페이지**: 예약 상황을 조회하고 취소, 추가 주문 기능을 제공합니다.
 
-### 3. 기능 구현
-- 로그인 및 회원가입 처리
-- 상품 검색 및 예약 목록 처리
-- 재고 현황 및 주문 현황 처리
+<hr/>
 
-### 4. 기능 검토 및 수정
-- 기능별 테스트 및 수정
-- 사용자 피드백을 바탕으로 한 최종 검토
+## System Requirements
 
-### 정민석 - `CustomerService`
+- **Programming Language**: Java 8
+- **Build Tool**: Gradle
+- **Web Framework**: Spring Boot 2.7.16
+- **Database**: MySQL 8.0
+- **Front-end**: HTML5, CSS3, JavaScript
 
-### 도메인 모델: `Customer`
+<hr/>
 
-- **속성**:
-    - `customer_id` (Integer): 고객의 고유 식별자.
-    - `id` (String): 고객의 로그인 ID.
-    - `password` (String): 고객의 비밀번호.
-    - `name` (String): 고객의 이름.
+## Getting Started
 
-### 서비스 레이어: `CustomerService`
+프로젝트 시작을 위한 기본 단계:
 
-- **login**: 고객이 시스템에 로그인할 때 사용됩니다. ID와 비밀번호가 일치하는 고객 정보를 데이터베이스에서 조회하고, 해당 정보를 세션에 저장합니다. 로그인 성공 시 true를 반환합니다.
-- **logout**: 고객이 시스템에서 로그아웃할 때 사용됩니다. 현재 세션을 무효화합니다.
-- **getUserById**: 고객의 ID로 고객 정보를 조회합니다. 캐시를 활용하여 성능을 개선하고 있으며, 찾은 고객 정보를 반환합니다.
+1. **프로젝트 클론하기**
+   ```bash
+   git clone https://example.com/convenience-store.git
+   ```
+   
+2. **프로젝트 디렉토리로 이동**
+   ```bash
+   cd convenience-store
+   ```
 
-### 최원일 - `ProductService`
+3. **환경 설정 파일 구성**
+   `application.properties` 또는 `application.yml` 파일에서 환경 설정.
 
-### 도메인 모델: `Product`
+4. **Spring Boot 애플리케이션 실행**
+   ```bash
+   ./gradlew bootRun
+   ```
+   Windows 사용자는 CMD 또는 PowerShell을 사용합니다.
 
-- **속성**:
-    - `productId` (Integer): 제품의 고유 식별자.
-    - `name` (String): 제품의 이름.
-    - `quantity` (int): 제품의 수량.
-    - `price` (int): 제품의 가격.
-    - `store` (Store): 제품이 속한 매장.
+<hr/>
 
-### 서비스 레이어: `ProductService`
+## Source Architecture
+```
+com.anyang.convenience
+├── controller
+│   ├── LoginController.java
+│   ├── ProductController.java
+│   └── ReservationController.java
+├── model
+│   └── entity
+│       ├── Customer.java
+│       ├── Product.java
+│       ├── Reservation.java
+│       └── Store.java
+├── repository
+│   ├── CustomerRepository.java
+│   ├── ProductRepository.java
+│   └── ReservationRepository.java
+├── service
+│  ├── CustomerService.java
+│  ├── ProductService.java
+│  ├── ReservationService.java
+│  └── ReservationService.java
+└── ConvenienceApplication.java
+```
 
-- **findProductByName**: 제품의 이름을 포함하는 문자열을 받아, 해당 문자열을 포함하는 모든 제품을 조회합니다.
-- **read**: 제품 ID를 받아 해당 제품의 정보를 조회합니다. 제품 정보가 있을 경우 그 정보를 반환합니다.
-- **update**: 제공된 제품 정보로 기존의 제품 정보를 업데이트합니다. 특히, 제품의 수량을 감소시키는 로직을 포함하고 있으며, 업데이트 후의 제품 정보를 반환합니다.
-- **rollBack**: 이 메소드는 트랜잭션을 롤백하는 데 사용됩니다. 제품의 수량을 증가시키고 업데이트된 정보를 반환합니다.
+<hr/>
 
-### 김강민 - `ReservationService` + RollBack
-
-### 도메인 모델: `Reservation`
-
-- **속성**:
-    - `num` (Integer): 예약의 고유 식별자.
-    - `quantity` (int): 예약된 제품의 수량.
-    - `price` (int): 예약의 총 가격.
-    - `time` (Timestamp): 예약 시간.
-    - `customer` (Customer): 예약한 고객.
-    - `product` (Product): 예약된 제품.
-    - `store` (Store): 예약이 이루어진 매장.
-
-### 서비스 레이어: `ReservationService`
-
-- **save**: 새로운 예약 정보를 저장합니다. 예약 시 제품의 가격과 수량을 곱하여 총 가격을 계산하고, 이 정보를 저장합니다.
-- **getAllReservations**: 현재 로그인한 고객의 모든 예약 정보를 조회합니다.
-- **getReservationWithProduct**: 특정 예약 ID로 예약 정보를 조회합니다.
-- **delete**: 특정 예약 ID로 예약 정보를 삭제합니다.
-- **rollBack**: `ProductService`의 `rollBack` 메소드
+## Contact
+- 프로젝트 관련 문의는 [이메일](lnewgatel@gmail.com)로 연락 주세요.
