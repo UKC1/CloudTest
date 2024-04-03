@@ -1,9 +1,9 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.w3.org/1999/xhtml">
 <head>
-  <meta charset="UTF-8">
-  <title>예약 확인</title>
-  <style>
+    <meta charset="UTF-8">
+    <title>예약 확인</title>
+    <style>
         body {
             font-family: 'Arial', sans-serif;
             background: linear-gradient(to bottom, #96B3E8, #66a3d4);
@@ -29,9 +29,9 @@
         }
 
         h2 {
-        font-size: 28px;
-        margin-top: 20px;
-        text-align: center; /* 텍스트 가운데 정렬 */
+            font-size: 28px;
+            margin-top: 20px;
+            text-align: center; /* 텍스트 가운데 정렬 */
         }
 
         label {
@@ -143,39 +143,39 @@
 </head>
 <body>
 <form action="/logout" method="get">
-  <button class="logout-button" type="submit">로그아웃</button>
+    <button class="logout-button" type="submit">로그아웃</button>
 </form>
 <form action="/search" method="get">
-  <button class="order-button" type="submit">추가주문</button>
+    <button class="order-button" type="submit">추가주문</button>
 </form>
 
 <div>
-  <h2>예약 현황</h2>
-  <p th:if="${message}" th:text="${message}"></p>
-  <table>
-    <thead>
-    <tr>
-      <th>가게</th>
-      <th>물품</th>
-      <th>수량</th>
-      <th>가격</th>
-      <th>예약</th>
-    </tr>
-    </thead>
-    <tbody>
-    <tr th:each="reservation : ${reservations}">
-      <td th:text="${reservation?.store?.name}"></td>
-      <td th:text="${reservation?.product?.name}"></td>
-      <td th:text="${reservation.quantity}"></td>
-      <td th:text="${reservation.price}"></td>
-      <td>
-        <form th:action="@{/delete/{id}(id=${reservation.reservationId})}" method="post">
-          <button class="button" type="submit">취소</button>
-        </form>
-      </td>
-    </tr>
-    </tbody>
-  </table>
+    <h2>예약 현황</h2>
+    <p th:if="${message}" th:text="${message}"></p>
+    <table>
+        <thead>
+        <tr>
+            <th>가게</th>
+            <th>물품</th>
+            <th>수량</th>
+            <th>가격</th>
+            <th>예약</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr th:each="reservation : ${reservations}">
+            <td th:text="${reservation?.store?.name}"></td>
+            <td th:text="${reservation?.product?.name}"></td>
+            <td th:text="${reservation.quantity}"></td>
+            <td th:text="${reservation.price}"></td>
+            <td>
+                <form th:action="@{/delete/{id}(id=${reservation.reservationId})}" method="post">
+                    <button class="button" type="submit">취소</button>
+                </form>
+            </td>
+        </tr>
+        </tbody>
+    </table>
 </div>
 </body>
 </html>

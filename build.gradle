@@ -1,11 +1,22 @@
 plugins {
 	id 'java'
+	id 'checkstyle'
 	id 'org.springframework.boot' version '2.7.15'
 	id 'io.spring.dependency-management' version '1.0.15.RELEASE'
 }
 
-group = 'com.example'
+group = 'com.anyang'
 version = '0.0.1-SNAPSHOT'
+
+compileJava.options.encoding = 'UTF-8'
+compileTestJava.options.encoding = 'UTF-8'
+
+checkstyle {
+	maxWarnings = 0
+	configFile = file("${rootDir}/config/naver-checkstyle-rules.xml")
+	configProperties = ["suppressionFile": "${rootDir}/config/naver-checkstyle-suppressions.xml"]
+	toolVersion = "8.42"
+}
 
 java {
 	sourceCompatibility = '1.8'

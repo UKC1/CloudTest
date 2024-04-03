@@ -29,9 +29,9 @@
         }
 
         h2 {
-        font-size: 28px;
-        margin-top: 20px;
-        text-align: center; /* 텍스트 가운데 정렬 */
+            font-size: 28px;
+            margin-top: 20px;
+            text-align: center; /* 텍스트 가운데 정렬 */
         }
 
         label {
@@ -176,9 +176,10 @@
             <td th:text="${product.quantity}"></td>
             <td th:text="${product.price}"></td>
             <td>
-                <form th:action="@{/reserve/{id}(id=${product.productId})}" method="get" th:if="${product.quantity > 0}">
-                    <input type="hidden" name="productName" th:value="${product.name}" />
-                    <input type="hidden" name="productPrice" th:value="${product.price}" />
+                <form th:action="@{/reserve/{id}(id=${product.productId})}" method="get"
+                      th:if="${product.quantity > 0}">
+                    <input type="hidden" name="productName" th:value="${product.name}"/>
+                    <input type="hidden" name="productPrice" th:value="${product.price}"/>
                     <button class="button" type="submit">주문</button>
                 </form>
                 <button type="button" class="reserve-button" th:unless="${product.quantity > 0}" disabled>매진</button>
