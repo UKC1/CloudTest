@@ -47,7 +47,7 @@ public class ProductService {
 
     private Product toProductResponse(Product product) {
         return Product.builder()
-                .productId(product.getProductId())  //product_id 추가
+                .productId(product.getProductId())
                 .store(product.getStore())
                 .name(product.getName())
                 .quantity(product.getQuantity())

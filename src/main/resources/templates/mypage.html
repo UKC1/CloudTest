@@ -164,8 +164,8 @@
     </thead>
     <tbody>
     <tr th:each="reservation : ${reservations}">
-      <td th:text="${reservation.store.name}"></td>
-      <td th:text="${reservation.product.name}"></td>
+      <td th:text="${reservation?.store?.name}"></td>
+      <td th:text="${reservation?.product?.name}"></td>
       <td th:text="${reservation.quantity}"></td>
       <td th:text="${reservation.price}"></td>
       <td>

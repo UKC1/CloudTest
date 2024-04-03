@@ -17,7 +17,6 @@ import java.util.List;
 import java.util.Optional;
 
 import static org.assertj.core.api.Assertions.assertThat;
-import static org.junit.jupiter.api.Assertions.*;
 import static org.mockito.ArgumentMatchers.any;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
@@ -38,68 +37,57 @@ class ReservationServiceTest {
     @BeforeEach
     void setUp() {
         session = new MockHttpSession();
-        customer = new Customer(); // Initialize Customer
-        product = new Product(); // Initialize Product
+        customer = new Customer();
+        product = new Product();
 
-        // Customer and Product initialization logic here
         session.setAttribute("customer", customer);
     }
 
     @Test
-    void save() {
+    void save_ShouldCalculateTotalPriceAndSaveReservation() {
         Reservation reservation = new Reservation();
         reservation.setCustomer(customer);
         reservation.setProduct(product);
         reservation.setQuantity(1);
-        product.setPrice(1000); // Example price
+        product.setPrice(1000);
         when(reservationRepository.save(any(Reservation.class))).thenReturn(reservation);
 
-        // When
         Reservation savedReservation = reservationService.save(reservation);
 
-        // Then
         assertThat(savedReservation.getPrice()).isEqualTo(1000);
         verify(reservationRepository).save(reservation);
     }
 
     @Test
-    void getAllReservations() {
-        // Given
+    void getAllReservations_ShouldReturnReservationsOfLoggedInCustomer() {
+
         when(reservationRepository.findByCustomer(customer)).thenReturn(Arrays.asList(new Reservation(), new Reservation()));
 
-        // When
         List<Reservation> reservations = reservationService.getAllReservations(session);
 
-        // Then
         assertThat(reservations).hasSize(2);
         verify(reservationRepository).findByCustomer(customer);
     }
 
     @Test
-    void getReservationWithProduct() {
-        // Given
+    void getReservationWithProduct_ShouldReturnReservationById() {
         Integer reservationId = 1;
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(new Reservation()));
 
-        // When
         Optional<Reservation> reservation = reservationService.getReservationWithProduct(reservationId);
 
-        // Then
         assertThat(reservation).isPresent();
         verify(reservationRepository).findById(reservationId);
     }
 
     @Test
-    void delete() {
-        // Given
+    void delete_ShouldDeleteReservationById() {
         Integer reservationId = 1;
         Reservation reservation = new Reservation();
         when(reservationRepository.findById(reservationId)).thenReturn(Optional.of(reservation));
 
-        // When
         reservationService.delete(reservationId);
 
-        // Then
         verify(reservationRepository).delete(reservation);
     }
 }

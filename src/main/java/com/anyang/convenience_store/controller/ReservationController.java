@@ -63,15 +63,7 @@ public class ReservationController {
             Reservation reservation = reservationOptional.get();
             Product product = reservation.getProduct();
 
-            // 이제 예약 정보와 상품 정보를 사용할 수 있습니다.
-//            System.out.println("Reservation ID: " + reservation.getNum());
-//            System.out.println("Reservation Quantity: " + reservation.getQuantity());
-//            System.out.println("Product ID: " + product.getProductId());
-//            System.out.println("Product Name: " + product.getName());
-
-            // 여기서 추가 작업 수행 가능
             productService.rollBack(product, reservation.getQuantity());
-            // 예약 삭제
             reservationService.delete(id);
         }
         return "redirect:/mypage";

@@ -140,10 +140,6 @@
             color: #b392c5;
         }
 
-
-
-
-
     </style>
 </head>
 <body>
@@ -175,7 +171,7 @@
         </thead>
         <tbody>
         <tr th:each="product : ${foundProducts}">
-            <td th:text="${product.store.name}"></td>
+            <td th:text="${product?.store?.name}"></td>
             <td th:text="${product.name}"></td>
             <td th:text="${product.quantity}"></td>
             <td th:text="${product.price}"></td>

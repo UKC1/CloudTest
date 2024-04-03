@@ -56,7 +56,6 @@ public class ProductController {
             return "fail";
         }
 
-        // ReservationService에서 만들 코드
         Reservation newReservation = new Reservation();
         newReservation.setQuantity(productRequest.getQuantity());
         newReservation.setPrice(sessionProduct.getPrice());

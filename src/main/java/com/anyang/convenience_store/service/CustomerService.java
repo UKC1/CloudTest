@@ -13,18 +13,11 @@ public class CustomerService {
     @Autowired
     private CustomerRepository customerRepository;
 
-    public boolean login(String id, String password, HttpSession session) {
-        Optional<Customer> customer = customerRepository.findByLoginIdAndPasswordHash(id, password);
-
-        if(customer.isPresent()) {
-            session.setAttribute("customer", customer.get());
-            return true;
-        }
-
-        return false;
+    public void save(Customer customer) {
+        customerRepository.save(customer);
     }
 
-    public void logout(HttpSession session) {
-        session.invalidate();
+    public Optional<Customer> authenticate(String id, String password) {
+        return customerRepository.findByLoginIdAndPasswordHash(id, password);
     }
 }
