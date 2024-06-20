@@ -22,7 +22,6 @@ import com.anyang.convenience.service.ReservationService;
 public class ReservationController {
 	@Autowired
 	private ReservationService reservationService;
-
 	@Autowired
 	private ProductService productService;
 
@@ -32,7 +31,6 @@ public class ReservationController {
 		if (customer == null) {
 			return "redirect:/login";
 		}
-
 		return "reserve";
 	}
 
@@ -40,7 +38,6 @@ public class ReservationController {
 	public String reserveForm(@PathVariable Integer id, Model model, HttpSession session) {
 		Product productResponse = productService.read(id);
 		session.setAttribute("product", productResponse);
-
 		model.addAttribute("productinfo", productResponse);
 		return "reserve";
 	}
@@ -51,21 +48,17 @@ public class ReservationController {
 		if (customer == null) {
 			return "redirect:/login";
 		}
-
 		List<Reservation> reservations = reservationService.getAllReservations(session);
 		model.addAttribute("reservations", reservations);
-
 		return "mypage";
 	}
 
 	@PostMapping("/delete/{id}")
 	public String RollbackReservation(@PathVariable Integer id, HttpSession session) {
 		Optional<Reservation> reservationOptional = reservationService.getReservationWithProduct(id);
-
 		if (reservationOptional.isPresent()) {
 			Reservation reservation = reservationOptional.get();
 			Product product = reservation.getProduct();
-
 			productService.rollBack(product, reservation.getQuantity());
 			reservationService.delete(id);
 		}

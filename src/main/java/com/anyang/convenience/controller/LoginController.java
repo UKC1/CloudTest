@@ -43,7 +43,7 @@ public class LoginController {
 		customer.setPasswordHash(password);
 
 		customerService.save(customer);
-		return "redirect:/index";
+		return "redirect:/login";
 	}
 
 	@PostMapping("/login")

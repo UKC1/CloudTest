@@ -39,13 +39,11 @@ public class ProductController {
 	@PostMapping("/search")
 	public String searchItem(@RequestParam String name, Model model) {
 		List<Product> foundProducts = productService.findProductByName(name);
-
 		if (!foundProducts.isEmpty()) {
 			model.addAttribute("foundProducts", foundProducts);
 		} else {
 			model.addAttribute("message", "물건을 찾을 수 없습니다.");
 		}
-
 		return "search";
 	}
 
@@ -53,14 +51,11 @@ public class ProductController {
 	public String ProductUpdateForm(@ModelAttribute Product productRequest, HttpSession session) {
 		Product sessionProduct = (Product)session.getAttribute("product");
 		Customer sessionCustomer = (Customer)session.getAttribute("customer");
-
 		sessionProduct.setQuantity(productRequest.getQuantity());
 		Product updatedProduct = productService.update(sessionProduct);
-
 		if (updatedProduct == null) {
 			return "fail";
 		}
-
 		Reservation newReservation = new Reservation();
 		newReservation.setQuantity(productRequest.getQuantity());
 		newReservation.setPrice(sessionProduct.getPrice());
@@ -68,10 +63,7 @@ public class ProductController {
 		newReservation.setCustomer(sessionCustomer);
 		newReservation.setProduct(updatedProduct);
 		newReservation.setStore(sessionProduct.getStore());
-
 		reservationService.save(newReservation);
-
 		return "redirect:/mypage";
 	}
-
 }
