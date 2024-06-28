@@ -1,0 +1,82 @@
+.rs-drawer-backdrop{
+  position: fixed;
+  top: 0;
+  right: auto;
+  bottom: 0;
+  left: auto;
+  z-index: 1050;
+  max-width: 768px;
+  width: 100%;
+}
+.rs-drawer-wrapper{
+  position: fixed;
+  z-index: 1050;
+  top: 0;
+  left: auto;
+  width: 100%;
+  height: 100%;
+  max-width: 767px;
+  .rs-drawer{
+    max-width: inherit;
+
+    .rs-drawer-dialog {
+      position: relative;
+      bottom: 0;
+      width: 100%;
+      max-width: 768px;
+
+      .rs-drawer-content {
+        position: absolute;
+        bottom: 0;
+        background-color: #fff;
+        outline: 0;
+        width: 100%;
+        height: auto;
+        border-top-left-radius: 20px;
+        border-top-right-radius: 20px;
+
+        .rs-drawer-header{
+          border: none;
+          padding: 20px;
+
+          .rs-drawer-header-close{
+            position: absolute;
+            left: auto;
+            right: 10px;
+            top: 10px;
+
+            .rs-icon{
+              font-size: 20px;
+            }
+
+          }
+
+          .rs-drawer-title{
+            display: flex;
+            justify-content: center;
+          }
+        }
+
+        .rs-drawer-body{
+          padding: 20px;
+
+          &::-webkit-scrollbar {
+            display: none;
+          }
+        }
+
+      }
+    }
+
+  }
+}
+
+
+.drawer.place-drawer {
+  .rs-drawer-dialog {
+
+    .rs-drawer-content {
+      height: 100vh;
+    }
+  }
+}

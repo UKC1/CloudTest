@@ -1,0 +1,105 @@
+plugins {
+    id 'java'
+    id 'org.springframework.boot' version '3.2.4'
+    id 'io.spring.dependency-management' version '1.1.4'
+}
+
+group = 'com.cookshare'
+version = '0.0.1-SNAPSHOT'
+
+java {
+    sourceCompatibility = '17'
+}
+
+compileJava {
+    options.compilerArgs << '-parameters'
+}
+
+configurations {
+    compileOnly {
+        extendsFrom annotationProcessor
+    }
+}
+
+repositories {
+    mavenCentral()
+}
+
+dependencies {
+    implementation 'org.springframework.boot:spring-boot-starter-data-jpa'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb-reactive'
+    implementation 'org.springframework.boot:spring-boot-starter-aop'
+    implementation 'org.springframework.boot:spring-boot-starter-web'
+    compileOnly 'org.projectlombok:lombok'
+    developmentOnly 'org.springframework.boot:spring-boot-devtools'
+    // mysql
+    implementation 'org.springframework.boot:spring-boot-starter'
+    //runtimeOnly 'mysql:mysql-connector-java'
+    implementation 'mysql:mysql-connector-java:8.0.33'
+    implementation 'org.hibernate:hibernate-core:6.4.4.Final'
+    runtimeOnly('com.mysql:mysql-connector-j')
+
+    annotationProcessor 'org.projectlombok:lombok'
+    testImplementation 'org.springframework.boot:spring-boot-starter-test'
+    testImplementation 'org.springframework.security:spring-security-test'
+    testImplementation 'io.projectreactor:reactor-test'
+
+
+    //웹소캣
+    implementation 'org.springframework.boot:spring-boot-starter-websocket' // 웹소켓 의존성 추가
+
+    //테스트코드 로깅 사용
+    testCompileOnly 'org.projectlombok:lombok'
+    testAnnotationProcessor 'org.projectlombok:lombok'
+
+    //log4jdbc
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+
+    // 스프링 부트 스타터 데이터 MongoDB
+    implementation 'org.springframework.boot:spring-boot-starter-data-mongodb'
+
+
+    // Spring Security
+    implementation 'org.springframework.boot:spring-boot-starter-security'
+    //jwt
+    //JWT 설정 1
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-api
+    implementation 'io.jsonwebtoken:jjwt-api:0.11.5'
+    //JWT 설정 2
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-impl
+    implementation 'io.jsonwebtoken:jjwt-impl:0.11.5'
+    //JWT 설정 3
+    // https://mvnrepository.com/artifact/io.jsonwebtoken/jjwt-jackson
+    implementation'io.jsonwebtoken:jjwt-jackson:0.11.5'
+    // log4jdbc
+    implementation 'org.bgee.log4jdbc-log4j2:log4jdbc-log4j2-jdbc4.1:1.16'
+    // OAuth2 관련 의존성 추가
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-client'
+    implementation 'org.springframework.boot:spring-boot-starter-oauth2-resource-server'
+    // ConfigurationProperties 외부 설정파일의 속성을 java객체로 바인딩
+    implementation 'org.springframework.boot:spring-boot-configuration-processor'
+
+    //implementation ("org.springframework.security:spring-security-config:5.6.0")
+
+    // https://mvnrepository.com/artifact/net.nurigo/javaSDK
+    //implementation 'net.nurigo:javaSDK:2.2'
+    implementation 'net.nurigo:sdk:4.3.0'
+
+
+    // MapStruct
+    implementation 'org.mapstruct:mapstruct:1.4.2.Final'
+    annotationProcessor "org.projectlombok:lombok-mapstruct-binding:0.2.0"
+    annotationProcessor 'org.mapstruct:mapstruct-processor:1.4.2.Final'
+
+    //redis
+    implementation 'org.springframework.boot:spring-boot-starter-data-redis'
+    implementation 'redis.clients:jedis'
+
+    implementation 'org.mindrot:jbcrypt:0.4'
+
+}
+
+tasks.named('test') {
+    useJUnitPlatform()
+}

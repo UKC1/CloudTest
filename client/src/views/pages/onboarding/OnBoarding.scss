@@ -1,0 +1,71 @@
+.onBoarding{
+  padding: 0 24px;
+  .swiper{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    padding: 0 24px;
+    width: 100%;
+    height: 700px;
+
+    .swiper_slide{
+      header{
+        display: flex;
+        justify-content: flex-end;
+        border-bottom: none;
+        button{
+          font-size: 16px;
+        }
+      }
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      gap: 50px;
+      .img_box{
+        max-width: 100%;
+        padding-top: 50px;
+        height: 360px;
+        img{
+          width: 100%;
+          height: 100%;
+          object-fit: contain;
+        }
+      }
+      .desc{
+        h2{
+          font-size: 1.25rem;
+        }
+        .txt{
+          padding-top: 20px;
+
+          p{
+            font-size: 1rem;
+          }
+        }
+      }
+      .btn_wrap{
+        width: 100%;
+        padding-bottom: 50px;
+        button{
+          width: 100%;
+          height: 52px;
+          border-radius: 8px;
+          background-color: #ff9000;
+
+          span{
+            font-size: 1rem;
+            font-weight: bold;
+            color: #fff;
+          }
+        }
+      }
+    }
+  }
+  .swiper-pagination{
+    position: relative;
+  }
+  .swiper-pagination-bullet-active{
+    background-color: #ff9000;
+  }
+}

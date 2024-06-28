@@ -1,0 +1,11 @@
+.badge{
+
+  &.badge_ongoing{
+  }
+  &.badge_done{
+    padding: 5px 10px;
+    color: #fff;
+    border-radius: 8px;
+    background-color: #ff9000;
+  }
+}

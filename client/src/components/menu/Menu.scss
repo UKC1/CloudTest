@@ -1,0 +1,21 @@
+.menu{
+  ul{
+    display: flex;
+    gap: 10px;
+    .menu_list{
+      width: 100%;
+      a{
+        display: block;
+        padding: 14px;
+        width: 100%;
+        font-size: 18px;
+        font-weight: bold;
+        text-align: center;
+        background-color: rgba(255, 144, 0, 0.1);
+        border: 1px solid rgba(255, 144, 0, 0.2);
+        border-radius: 8px;
+        color: #555;
+      }
+    }
+  }
+}
