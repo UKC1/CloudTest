@@ -20,6 +20,10 @@ import java.util.Random;
 @RestController
 @RequestMapping("/api/user")
 public class OTPController {
+
+    @Value("${COOLSMS_API_FROM}")
+    private String mobileNumber;
+
     final DefaultMessageService messageService;
 
     public OTPController(@Value("${coolsms.api.key}") String apiKey,
@@ -39,7 +43,7 @@ public class OTPController {
 
 
         Message message = new Message();
-        message.setFrom("01025404366");
+        message.setFrom(mobileNumber);
         message.setTo(toPhoneNumber);
         message.setText("쿡쉐어(CookShare) 인증번호 입니다: " + checkNum);
 
